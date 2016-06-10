@@ -11,6 +11,9 @@ var backOfCard = "_Back.png";
 var queenCard = "Spades 12.png";
 var kingCard = "Spades 13.png";
 
+//score
+var score = 0;
+
 //function to create board
 var createBoard = function() {
 
@@ -36,9 +39,16 @@ var createBoard = function() {
 }
 
 var isMatch = function(cards){
-	if (cards[0] === cards[1]) {alert("Cards Match!");}
+	if (cards[0] === cards[1]) {
+		alert("Cards Match!");
+
+		//update score
+		updateScore(); 
+	}
 	else {alert("Cards Don't Match!");}
-	return cards[0] === cards[1]; 
+
+	//update cards to back of card state
+	updateCards(); 
 }
 
 //checks to see if there are cards in play
@@ -63,17 +73,23 @@ var isTwoCards = function(){
 		//clear cards in play array for next try
 		cardsInPlay = []; 
 
-		//reload window
-		location.reload(); 
 
 	}
 }
 
-var resetCards = function() {
-	for(var i=0; i<cards.length; i++) {
-		document.getElementsByClassName("card").src = backOfCard; 
-	}	
+var updateCards = function() {
+		
+		for(var i=0; i<cards.length; i++)
+		{
+			document.getElementsByTagName("img")[i].setAttribute("src", backOfCard);
+		}
+		
+		
+}
 
+var updateScore = function() {
+	score += 10; 
+	document.getElementById('score').textContent = score; 
 }
 
 
